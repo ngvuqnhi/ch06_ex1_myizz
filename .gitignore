@@ -1,6 +1,34 @@
+# IntelliJ IDEA
 .idea/
 *.iml
+*.iws
+*.ipr
+
+# Build outputs
 out/
 target/
-*.war
+build/
+classes/
+nbproject/private/
+dist/
+
+# Tomcat / JetBrains run dir
+**/apache-tomcat-*/
+**/tomcat/*
+**/Library/Caches/JetBrains/**/tomcat/
+
+# OS junk
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE caches
+.gradle/
+.mvn/
+.vscode/
+
+# Maven/Gradle wrapper
+.mvn/wrapper/maven-wrapper.jar
+.gradle/

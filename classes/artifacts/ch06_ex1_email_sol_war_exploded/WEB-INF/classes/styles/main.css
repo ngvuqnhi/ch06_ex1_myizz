@@ -1,126 +1,164 @@
+/* ====== Glassmorphism + Coral theme (khác hoàn toàn bản indigo trước) ====== */
 :root{
-    --bg:#f5f7fb;
-    --card:#ffffff;
-    --text:#1a1d29;
-    --muted:#555c6b;
-    --accent:#4f46e5;      /* tím indigo */
-    --accent-2:#3a32c6;    /* tím đậm hơn */
-    --border:#e7eef3;
-    --input:#ffffff;
-    --radius:14px;
-    --shadow:0 8px 20px rgba(0,0,0,.06);
+    --bg-grad: radial-gradient(1200px 600px at 10% 0%, #ffe9df 0%, transparent 47%),
+    radial-gradient(1000px 600px at 100% 100%, #e7f4ff 0%, transparent 45%),
+    #f6f7fb;
+    --glass: rgba(255,255,255,.68);
+    --border: rgba(15,23,42,.10);
+    --text: #0f172a;          /* slate-900 */
+    --muted: #475569;         /* slate-600 */
+    --tiny: #64748b;
+    --coral: #ff6a3d;         /* chủ đạo */
+    --coral-2:#ff835d;
+    --emerald:#10b981;
+    --shadow: 0 16px 40px rgba(2,6,23,.10), 0 4px 10px rgba(2,6,23,.06);
+    --radius: 18px;
 }
 
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
 body{
     margin:0;
-    background:var(--bg);
-    font:16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font:16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     color:var(--text);
+    background: var(--bg-grad);
 }
 
-.page{
-    min-height:calc(100vh - 80px);
-    display:flex; align-items:center; justify-content:center;
-    padding:32px 16px;
+/* hero + glass card */
+.hero{
+    min-height: calc(100vh - 80px);
+    display:grid; place-items:center;
+    padding: clamp(18px, 4vw, 48px);
+}
+.glass{
+    width: min(820px, 94vw);
+    background: var(--glass);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(22px, 5vw, 40px);
 }
 
-.card{
-    width:min(700px,92vw);
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    padding:clamp(20px,5vw,36px);
+/* brand header */
+.brand{ margin-bottom: 18px; }
+.brand h1{
+    margin: 0 0 6px;
+    font-weight: 800;
+    letter-spacing: .2px;
+    font-size: clamp(26px, 3.2vw, 34px);
+}
+.brand p{ margin:0; color:var(--muted); }
+.dot{
+    width: 12px; height: 12px; border-radius: 999px;
+    background: var(--coral);
+    display:inline-block; margin-right: 8px; vertical-align: 2px;
+    box-shadow: 0 0 0 6px rgba(255,106,61,.13);
+}
+.dot--ok{ background: var(--emerald); box-shadow: 0 0 0 6px rgba(16,185,129,.15); }
+
+/* form layout */
+.grid{
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+    margin-top: 10px;
+}
+@media (min-width: 760px){
+    .grid{ grid-template-columns: repeat(2, 1fr); gap: 18px 22px; }
+    .grid .field:first-child{ grid-column: 1 / -1; } /* email full width */
+    .grid .btn{ grid-column: 1 / -1; width: fit-content; }
 }
 
-.title{ margin:0 0 8px; font-size:clamp(26px,3vw,32px); color:var(--accent); }
-.subtitle{ margin:0 0 20px; color:var(--muted); }
+.field{ display:grid; gap: 8px; }
+.field span{ font-weight: 700; color: var(--muted); font-size: .95rem; }
 
-.form{ display:grid; gap:18px; }
-.field{ display:grid; gap:6px; }
-
-label{ font-weight:600; color:var(--muted); }
-
-input[type="text"],input[type="email"],input[type="date"]{
-    width:100%;
-    background:var(--input);
-    border:1px solid var(--border);
-    color:var(--text);
-    border-radius:10px;
-    padding:12px 14px;
-    outline:none;
-    transition:border-color .2s, box-shadow .2s;
-}
-input:focus{
-    border-color:var(--accent);
-    box-shadow:0 0 0 3px rgba(79,70,229,.15);
-}
-
-/* Button */
-.btn-primary{
-    margin-top:8px;
+input[type="text"], input[type="email"], input[type="date"]{
     appearance:none;
-    border:1px solid transparent;
-    border-radius:10px;
-    padding:14px 18px;
-    font-weight:600;
-    letter-spacing:.3px;
-    background:linear-gradient(180deg,var(--accent),var(--accent-2));
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(15,23,42,.12);
+    background: rgba(255,255,255,.9);
+    color: var(--text);
+    outline: none;
+    transition: box-shadow .15s ease, border-color .15s ease, transform .06s ease;
+}
+input::placeholder{ color:#94a3b8; }
+input:focus{
+    border-color: rgba(255,106,61,.55);
+    box-shadow: 0 0 0 4px rgba(255,106,61,.18);
+    transform: translateY(-1px);
+}
+
+/* alerts */
+.note{
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(15,23,42,.10);
+    background: rgba(255,255,255,.8);
+    color: var(--text);
+    margin: 6px 0 12px;
+}
+.note.error{
+    border-color: rgba(239,68,68,.28);
+    background: rgba(254,226,226,.7);
+    color: #991b1b;
+}
+
+/* summary block (thanks page) */
+.summary{
+    display:grid; gap:12px; margin: 8px 0 18px;
+}
+.summary b{ display:block; color:#0f172a; font-size:.95rem; }
+.summary span{ color:var(--muted); }
+
+/* buttons */
+.btn{
+    --btn-bg: linear-gradient(180deg, var(--coral), var(--coral-2));
+    --btn-shadow: 0 10px 24px rgba(255,106,61,.28);
+    display:inline-flex; align-items:center; justify-content:center;
+    gap:10px;
+    border: none;
+    border-radius: 1000px;
+    padding: 12px 20px;
+    font-weight: 800;
+    letter-spacing: .3px;
     color:#fff;
-    cursor:pointer;
-    transition: background .25s, transform .06s ease;
+    background: var(--btn-bg);
+    box-shadow: var(--btn-shadow);
+    cursor: pointer;
+    transition: transform .06s ease, filter .18s ease, box-shadow .18s ease, background .18s ease;
 }
-.btn-primary:hover{
-    background:linear-gradient(180deg,#5f56f0,#4338ca);
-}
-/* Nhấn xuống: xanh “trong” */
-.btn-primary:active{
-    transform:translateY(1px);
-    background:linear-gradient(180deg,
-    rgba(125,211,252,.95),   /* #7dd3fc */
-    rgba(56,189,248,.90)     /* #38bdf8 */
-    );
-    box-shadow:0 6px 14px rgba(56,189,248,.28);
-}
+.btn:hover{ filter: brightness(1.06); box-shadow: 0 12px 26px rgba(255,106,61,.35); }
+.btn:active{ transform: translateY(1px); filter: brightness(.98); }
 
-/* Loading khi submit */
-.btn-primary.loading{
-    position:relative;
-    background:linear-gradient(180deg,
-    rgba(165,243,252,.95),   /* #a5f3fc */
-    rgba(34,211,238,.90)     /* #22d3ee */
-    ) !important;
-    color:#0b2940;
-    cursor:wait;
-    filter:none;
-    box-shadow:0 6px 14px rgba(34,211,238,.28);
+/* coral brand button */
+.btn.coral{}
+
+/* ghost button (thanks page) */
+.btn.ghost{
+    --btn-bg: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.75));
+    --btn-shadow: 0 8px 18px rgba(2,6,23,.08);
+    color: var(--text);
+    border: 1px solid rgba(15,23,42,.08);
 }
-.btn-primary.loading::after{
+.btn.ghost:hover{ filter: none; box-shadow: 0 10px 22px rgba(2,6,23,.12); }
+
+/* loading */
+.btn.is-loading{
+    position: relative;
+    cursor: wait;
+    opacity: .92;
+}
+.btn.is-loading::after{
     content:"";
-    width:14px;height:14px;margin-left:8px;border-radius:50%;
-    border:2px solid rgba(11,41,64,.25);
-    border-top-color:rgba(11,41,64,.9);
-    display:inline-block; vertical-align:-2px;
-    animation:spin .8s linear infinite;
+    width: 14px; height: 14px; border-radius: 999px;
+    border: 2px solid rgba(255,255,255,.45);
+    border-top-color: #fff;
+    display: inline-block;
+    animation: spin .8s linear infinite;
 }
-@keyframes spin{ to{ transform:rotate(360deg);} }
+@keyframes spin{ to{ transform: rotate(360deg);} }
 
-.btn-primary:disabled{ opacity:.85; cursor:not-allowed; }
-
-.alert{
-    margin-bottom:10px;
-    padding:10px 12px;
-    border:1px solid #e38b8b;
-    background:#ffecec;
-    color:#c0392b;
-    border-radius:10px;
-}
-
-.info{ margin:16px 0 24px; display:grid; gap:10px; }
-.info label{ font-weight:600; margin-right:6px; color:#334155; }
-
-@media (min-width:760px){
-    .form{ grid-template-columns:1fr 1fr; gap:20px 24px; }
-    .field:first-child{ grid-column:1 / -1; } /* Email full width */
-    .btn-primary{ grid-column:1 / -1; justify-self:start; }
-}
+.tiny{ margin-top: 12px; color: var(--tiny); font-size: .9rem; }

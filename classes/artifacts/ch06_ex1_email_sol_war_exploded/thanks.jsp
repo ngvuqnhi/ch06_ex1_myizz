@@ -2,21 +2,24 @@
 <%@ include file="/includes/header.html" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="page">
-    <div class="card">
-        <h1 class="title">Thanks for joining our email list 🎉</h1>
-        <p class="subtitle">Here is the information that you entered:</p>
+<div class="hero">
+    <div class="glass">
+        <div class="brand">
+            <div class="dot dot--ok"></div>
+            <h1>You're on the list! 🎉</h1>
+            <p>Thanks for subscribing. Here’s what we got:</p>
+        </div>
 
-        <div class="info">
-            <div><label>Email:</label> <span>${user.email}</span></div>
-            <div><label>First Name:</label> <span>${user.firstName}</span></div>
-            <div><label>Last Name:</label> <span>${user.lastName}</span></div>
-            <div><label>Date of Birth:</label> <span>${user.dob}</span></div>
+        <div class="summary">
+            <div><b>Email</b><span>${user.email}</span></div>
+            <div><b>First name</b><span>${user.firstName}</span></div>
+            <div><b>Last name</b><span>${user.lastName}</span></div>
+            <div><b>Date of birth</b><span>${user.dob}</span></div>
         </div>
 
         <form action="" method="post">
-            <input type="hidden" name="action" value="join">
-            <button type="submit" class="btn-primary">Return</button>
+            <input type="hidden" name="action" value="join"/>
+            <button class="btn ghost" type="submit"><span class="btn__label">Return</span></button>
         </form>
     </div>
 </div>
